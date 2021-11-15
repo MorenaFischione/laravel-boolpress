@@ -5,7 +5,7 @@
     <div class="container">
         <header class="p-3">
             <h1>Post pubblicati</h1>
-            {{-- <a href="{{route("admin.posts.create")}}">Crea nuovo post</a> --}}
+            <a href="{{route("admin.posts.create")}}">Crea nuovo post</a>
         </header>
 
         <table class="table table-bordered p-5">
