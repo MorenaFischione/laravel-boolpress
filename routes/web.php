@@ -28,4 +28,4 @@ Route::middleware('auth')
     Route::resource('posts', PostController::class);        
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
