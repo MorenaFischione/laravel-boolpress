@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Post;
+use App\Models\Category;
 
 class PostController extends Controller
 {
@@ -28,7 +29,8 @@ class PostController extends Controller
     public function create()
     {
         $post = new Post();
-        return view('admin.posts.create', compact('post'));
+        $categories = Category::all();
+        return view('admin.posts.create', compact('post', 'categories'));
     }
 
     /**
@@ -39,7 +41,26 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validazione sull'inserimento
+        $request->validate([
+            // la chiave sarò il name corrispondente nel blade.php
+            // il valore sarà la lista dei requisiti per la validazione
+            'title' => 'required|string|unique:posts|max:120',
+            'author' => 'required|string|max:60',
+            'post_content' => 'required|string|min:40',
+            'image_url' => "string|min:4",
+            'category_id'=>"nullable"
+        ],
+        [
+            "required" => 'Devi compilare correttamente :attribute',
+            "title.required" => 'Non è possibile inserire un post senza titolo',
+            "author.max" => "Non è possibile inserire un autore con più di 60 caratteri",
+            'post_content.min' => 'Il post deve essere lungo almeno 40 caratteri'
+        ]);
+
+
+
+
         $data = $request->all();
 
         $post = new Post();
