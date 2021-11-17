@@ -49,7 +49,6 @@ class PostController extends Controller
             'author' => 'required|string|max:60',
             'post_content' => 'required|string|min:40',
             'image_url' => "string|min:4",
-            'category_id'=>"nullable"
         ],
         [
             "required" => 'Devi compilare correttamente :attribute',
@@ -74,7 +73,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  Post $post
      * @return \Illuminate\Http\Response
      */
     public function show(Post $post)
