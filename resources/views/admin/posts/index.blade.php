@@ -11,6 +11,7 @@
         <table class="table table-bordered p-5">
             <thead>
                 <th class="col">Titolo</th>
+                <th class="col">Categoria</th>
                 <th class="col">Di</th>
                 <th class="col">Scritto il</th>
             </thead>
@@ -18,17 +19,13 @@
                 @forelse ($posts as $post)
                     <tr>
                         <td><a href="{{ route('admin.posts.show', $post->id ) }}">{{ $post->title }}</a></td>
+                        <td>@if ($post->category) 
+                            
+                            <span class="badge badge-primary px-4">{{ $post->category->name }} </span>
+                            
+                            @else Nessuna categoria @endif </td>
                         <td>{{ $post->author}}</td>
                         <td>{{ $post->post_date}}</td>
-                        {{-- <td><a href="{{ route('admin.posts.edit', $post ) }}" class="btn btn-secondary">Modifica</a></td> --}}
-                        {{-- <td>
-                            <form action="{{route('admin.posts.destroy', $post->id )}}" method="POST">
-                                @csrf
-                                @method('DELETE')
-
-                                <button class="btn btn-alert" type="submit">Elimina il post</a>
-                            </form>
-                        </td> --}}
                     </tr>
                 @empty
                     <tr>

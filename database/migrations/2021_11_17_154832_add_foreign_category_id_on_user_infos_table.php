@@ -14,7 +14,7 @@ class AddForeignCategoryIdOnUserInfosTable extends Migration
     public function up()
     {
         Schema::table('user_infos', function (Blueprint $table){
-            $table-> unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
 
             $table->foreign('user_id')
                 ->references('id')
@@ -31,8 +31,10 @@ class AddForeignCategoryIdOnUserInfosTable extends Migration
     public function down()
     {
         Schema::table('user_infos', function(Blueprint $table){
-            $table->dropForeign('user_infos_user_id_foreign');
-            $table->dropColumn('cuser_infos');
+            $table->dropForeign(['user_id']);
+            $table->dropColumn('user_infos');
             });
+
+        
     }
 }
