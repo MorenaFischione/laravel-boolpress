@@ -78,7 +78,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        dd(Category::pluck('id')->toArray());
+        // dd(Category::pluck('id')->toArray());
         return view('admin.posts.show', compact('post'));
     }
 

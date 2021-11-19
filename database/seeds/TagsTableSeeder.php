@@ -21,7 +21,6 @@ class TagsTableSeeder extends Seeder
             $newTag->color = $faker->hexColor();
 
             $newTag->save();
-
         }
     }
 }
