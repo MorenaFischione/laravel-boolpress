@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Arr;
 use App\Models\Post;
+use App\Models\Category;
 use Faker\Generator as Faker;
 
 
@@ -25,7 +26,7 @@ class PostsTableSeeder extends Seeder
             $newPost->post_date = $faker->dateTime;
             $newPost->post_content = $faker->paragraph(5, true);
 
-            $newPost->category_id = Arr::random($categories_id);
+            // $newPost->categories_id = Arr::random($categories_id);
 
             $newPost->slug = Str::slug($newPost->title, '-');
             $newPost->save();

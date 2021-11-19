@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run(Faker $faker){
 
-        $user = new User;
+        $user = new User();
         $user->name = "Morena";
         $user->email = 'morena@gmail.com';
         $user->password = bcrypt("mena1234");
