@@ -33,7 +33,18 @@
                     </select>
                 </div>
 
+                <div class="mb-3 form-group">
+                    <legend class="h5">Tags</legend>
+                    <div class="form-check form-check-inline">
+                        @foreach ( $tags as $tag)
+                            <input type="checkbox" class="form-check-input" id="tag-{{$tag->id}}" value="{{$tag->id}}" name="tags[]">
+                            <label class="form-check-label mx-1" for="tag-{{$tag->id}}">{{$tag->name}}</label>
+                        @endforeach
+                        
+                    </div>
+                </div>
 
+               
                 <div class="mb-3 form-group">
                     <label for="author" class="form-label">Autore del post</label>
                     <input type="text" id="author" class="form-control" placeholder="Inserisci l'autore del post" name="author" value={{old('author', $post->author)}}>

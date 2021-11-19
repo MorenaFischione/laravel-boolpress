@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Tag;
 
 class PostController extends Controller
 {
@@ -30,7 +31,8 @@ class PostController extends Controller
     {
         $post = new Post();
         $categories = Category::all();
-        return view('admin.posts.create', compact('post', 'categories'));
+        $tags = Tag::all();
+        return view('admin.posts.create', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -48,7 +50,6 @@ class PostController extends Controller
             'title' => 'required|string|unique:posts|max:120',
             'author' => 'required|string|max:60',
             'post_content' => 'required|string|min:40',
-            'image_url' => "string|min:4",
         ],
         [
             "required" => 'Devi compilare correttamente :attribute',
@@ -57,15 +58,15 @@ class PostController extends Controller
             'post_content.min' => 'Il post deve essere lungo almeno 40 caratteri'
         ]);
 
-
-
-
         $data = $request->all();
 
         $post = new Post();
         $post->fill($data);
         $post->slug = Str::slug($post->title, '-');
         $post->save();
+
+        //verifico che esista una chiave tags in data e aggiungo tutti i tag selezionati al post appena salvato
+        if(array_key_exists('tags', $data)) $post->tags()->attach($data['tags']); //Se esiste un campo tag allora significa che ne ho selezionato almeno uno allora prendi il post dammi i tag e ai tag aggiungo i tags selezionati 
 
         return redirect()-> route('admin.posts.show', compact('post'));
     }
