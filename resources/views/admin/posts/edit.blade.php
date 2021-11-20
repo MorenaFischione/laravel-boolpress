@@ -3,30 +3,22 @@
 @section('content')
     <div class="container">
         <header>
-            <h1>Crea un nuovo post</h1>
+            <h1>Modifica il post</h1>
         </header>
 
         <section id="post-form">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>        
-            @endif
-            <form action="{{route('admin.posts.store', $post->id)}}" method="post">
+            <form action="{{route('admin.posts.update', $post->id)}}" method="post">
                 @csrf
+                @method('PATCH')
                 <div class="mb-3 form-group">
                     <label for="title" class="form-label">Titolo del post</label>
                     <input type="text" id="title" class="form-control" placeholder="Inserisci il titolo del post" name="title" value={{old('title', $post->title)}}>
                 </div>
 
                 <div class="mb-3 form-group">
-                    <label for="category_id">Categoria</label>
+                    <label for="category_id" >Categoria</label>
                     <select name="category_id" id="category_id">
-                        <option value="{{null}} >Senza Categoria</option>
+                        <option value="{{null}}">Senza Categoria</option>
                         @foreach ($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>
                         @endforeach
@@ -59,9 +51,12 @@
                 </div>
 
 
-                <button type="submit" class="btn btn-primary">Crea</button>
+                <button type="submit" class="btn btn-primary">Modifica</button>
                 <button type="reset" class="btn btn-secondary">Cancella i dati</button>
             </form>
         </section>
     </div>
 @endsection
+            
+
+        
