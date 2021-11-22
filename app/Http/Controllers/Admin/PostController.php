@@ -50,6 +50,8 @@ class PostController extends Controller
             'title' => 'required|string|unique:posts|max:120',
             'author' => 'required|string|max:60',
             'post_content' => 'required|string|min:40',
+            'category_id' => 'nullable|exist:categories,id',
+            'tags' => 'nullable|exists:tags,id',
         ],
         [
             "required" => 'Devi compilare correttamente :attribute',
@@ -111,6 +113,22 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $request->validate([
+            // la chiave sarò il name corrispondente nel blade.php
+            // il valore sarà la lista dei requisiti per la validazione
+            'title' => 'required|string|unique:posts|max:120',
+            'author' => 'required|string|max:60',
+            'post_content' => 'required|string|min:40',
+            'category_id' => 'nullable|exist:categories,id',
+            'tags' => 'nullable|exists:tags,id',
+        ],
+        [
+            "required" => 'Devi compilare correttamente :attribute',
+            "title.required" => 'Non è possibile inserire un post senza titolo',
+            "author.max" => "Non è possibile inserire un autore con più di 60 caratteri",
+            'post_content.min' => 'Il post deve essere lungo almeno 40 caratteri'
+        ]);
+        
         $data = $request->all();
         // dd($data);
 
