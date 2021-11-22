@@ -20,6 +20,7 @@
                 <th class="col">Titolo</th>
                 <th class="col">Categoria</th>
                 <th class="col">Di</th>
+                <th class="col">Tags</th>
                 <th class="col">Scritto il</th>
                 <th class="col">Modifica</th>
                 <th class="col">Cancella</th>
@@ -32,8 +33,20 @@
                             
                             <span class="badge badge-primary px-4">{{ $post->category->name }} </span>
                             
-                            @else Nessuna categoria @endif </td>
+                            @else <span class="badge badge-primary ">Nessuna categoria</span> @endif </td>
                         <td>{{ $post->author}}</td>
+                        <td>
+                            @forelse ($post->tags as $tag)
+                                <span class="bagde badge-pill" style="background-color: {{ $tag->color}} ">{{$tag->name}}</span>
+                            @empty
+                                Nessun tag
+                            @endforelse
+                        </td>
+
+
+                        
+
+
                         <td>{{ $post->post_date}}</td>
                         <td> <a href="{{ route('admin.posts.edit', $post->id)}}" class="btn btn-primary">Modifica</a></td>
                         <td> 

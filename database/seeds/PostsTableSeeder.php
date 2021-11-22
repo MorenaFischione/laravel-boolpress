@@ -21,6 +21,7 @@ class PostsTableSeeder extends Seeder
 
         //funzione che crea array presa da una collection già esistende fatta sugli id. Ci sa la lista di tutti gli id.
         $category_ids = Category::pluck('id')->toArray();
+        // $tag_ids= Tag::pluck('id')->toArray();
         // $user_ids = User::pluck('id')->toArray();
 
         for ($i= 0; $i<50; $i++) {
@@ -36,6 +37,8 @@ class PostsTableSeeder extends Seeder
 
             $newPost->slug = Str::slug($newPost->title, '-');
             $newPost->save();
+
+            // $newPost->tags()->attach($)
 
         }
     }

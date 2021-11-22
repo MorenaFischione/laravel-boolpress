@@ -29,7 +29,8 @@
                     <legend class="h5">Tags</legend>
                     <div class="form-check form-check-inline">
                         @foreach ( $tags as $tag)
-                            <input type="checkbox" class="form-check-input" id="tag-{{$tag->id}}" value="{{$tag->id}}" name="tags[]">
+                            <input type="checkbox" class="form-check-input" id="tag-{{$tag->id}}" value="{{$tag->id}}" name="tags[]" @if (in_array($tag->id, old('tags', $tagIds ? $tagIds : []))) checked    
+                            @endif>
                             <label class="form-check-label mx-1" for="tag-{{$tag->id}}">{{$tag->name}}</label>
                         @endforeach
                         

@@ -18,7 +18,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::all();   
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -93,7 +93,13 @@ class PostController extends Controller
     {
         $categories = Category::all();
         $tags = Tag::all();
-        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
+        // dd($tags);
+
+        //recupero l'intera lista degli id dei tag connessi al singolo post in edit
+       $tagIds = $post->tags->pluck('id')->toArray();
+
+        // dd($tagIds);
+        return view('admin.posts.edit', compact('post', 'categories', 'tags', 'tagIds'));
     }
 
     /**
@@ -110,6 +116,8 @@ class PostController extends Controller
 
         $post->fill($data);
         $post->update();
+
+        if(array_key_exists('tags', $data)) $post->tags()->sync($data['tags']);
         return redirect()->route('admin.posts.show', compact('post'));
     }
 
@@ -121,6 +129,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if($post->tags) $post->tags()->detach();
         $post->delete();
         return redirect()->route('admin.posts.index')->with("deleted_title", $post->title )->with('alert-message', "$post->title è stato eliminato con successo");
     }

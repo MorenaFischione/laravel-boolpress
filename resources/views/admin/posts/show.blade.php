@@ -10,6 +10,9 @@
                 <span class="badge badge-primary px-4">{{ $post->category->name }} </span>    
             @else 
                 Nessuna categoria @endif </address>
+            
+            
+            
             <p class="card-body"> {{$post->post_content}} </p>
             <div class="card-footer back-to-list">
                 <a href="{{route('admin.posts.index')}}" class="btn btn-toolbar">Torna alla lista dei post</a>
