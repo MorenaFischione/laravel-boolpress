@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Post;
@@ -48,19 +48,19 @@ class PostController extends Controller
             // la chiave sarò il name corrispondente nel blade.php
             // il valore sarà la lista dei requisiti per la validazione
             'title' => 'required|string|unique:posts|max:120',
-            'author' => 'required|string|max:60',
             'post_content' => 'required|string|min:40',
-            'category_id' => 'nullable|exist:categories,id',
-            'tags' => 'nullable|exists:tags,id',
+            'image_url' => "string|min:4",
+            'category_id' => "nullable|exists:categories,id",
+            'tags' => 'nullable|exists:tags,id'
         ],
         [
             "required" => 'Devi compilare correttamente :attribute',
             "title.required" => 'Non è possibile inserire un post senza titolo',
-            "author.max" => "Non è possibile inserire un autore con più di 60 caratteri",
-            'post_content.min' => 'Il post deve essere lungo almeno 40 caratteri'
+            'post_content.min' => 'Il post deve essere lungo almeno 40 caratteri    '
         ]);
 
         $data = $request->all();
+        $data['user_id'] = Auth::user()->id;
 
         $post = new Post();
         $post->fill($data);

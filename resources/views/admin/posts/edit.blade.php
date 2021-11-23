@@ -39,8 +39,8 @@
 
                
                 <div class="mb-3 form-group">
-                    <label for="author" class="form-label">Autore del post</label>
-                    <input type="text" id="author" class="form-control" placeholder="Inserisci l'autore del post" name="author" value={{old('author', $post->author)}}>
+                    <label for="user_id" class="form-label">Autore del post</label>
+                    <input type="text" id="user_id" class="form-control" placeholder="Inserisci l'autore del post" name="user_id" value={{old('user_id', $post->user_id)}}>
                 </div>
                 <div class="mb-3 form-group">
                     <label for="post_date" class="form-label">Autore del post</label>

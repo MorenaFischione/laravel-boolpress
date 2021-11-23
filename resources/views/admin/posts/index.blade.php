@@ -34,7 +34,7 @@
                             <span class="badge badge-primary px-4">{{ $post->category->name }} </span>
                             
                             @else <span class="badge badge-primary ">Nessuna categoria</span> @endif </td>
-                        <td>{{ $post->author}}</td>
+                        <td>{{ $post->user->name}}</td>
                         <td>
                             @forelse ($post->tags as $tag)
                                 <span class="bagde badge-pill" style="background-color: {{ $tag->color}} ">{{$tag->name}}</span>
@@ -42,10 +42,6 @@
                                 Nessun tag
                             @endforelse
                         </td>
-
-
-                        
-
 
                         <td>{{ $post->post_date}}</td>
                         <td> <a href="{{ route('admin.posts.edit', $post->id)}}" class="btn btn-primary">Modifica</a></td>

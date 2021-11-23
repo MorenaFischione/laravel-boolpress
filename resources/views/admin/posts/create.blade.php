@@ -45,10 +45,10 @@
                 </div>
 
                
-                <div class="mb-3 form-group">
-                    <label for="author" class="form-label">Autore del post</label>
-                    <input type="text" id="author" class="form-control" placeholder="Inserisci l'autore del post" name="author" value={{old('author', $post->author)}}>
-                </div>
+                {{-- <div class="mb-3 form-group">
+                    <label for="user_id" class="form-label">Autore del post</label>
+                    <input type="text" id="user_id" class="form-control" placeholder="Inserisci l'autore del post" name="user_id" value={{old('user_id', $post->user_id)}}>
+                </div> --}}
                 <div class="mb-3 form-group">
                     <label for="post_date" class="form-label">Autore del post</label>
                     <input type="date" id="post_date" class="form-control" placeholder="Inserisci la data di creazione del post" name="post_date" value={{$post->post_date}}>
