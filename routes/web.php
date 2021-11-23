@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Guests\HomeController@index')->name('guests.home');
 
 Auth::routes();
 
@@ -29,3 +27,8 @@ Route::middleware('auth')
 });
 
 // Route::get('/home', 'HomeController@index')->name('home');
+
+// Tutte le rotte che iniziano e finiscono per qualsiasi carattere che non siano state gestite fino ad ora saranno reindirizzate alla home.
+Route::get("{any?}", function(){
+    return view('guests.home');
+})->where("any", ".*");
