@@ -5,7 +5,7 @@
         <div class="loader" v-if="isLoading">
             <div class="spinner-border text-info " role="status">
                 <span class="sr-only">Loading...</span>        
-            </div>
+            </div>                                                    
         </div>
         
         <PostCard v-else v-for="post in posts" :key="post.id" :post="post" class="p-2 my-4"/>

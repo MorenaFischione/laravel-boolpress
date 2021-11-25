@@ -16,7 +16,7 @@
                     </ul>
                 </div>        
             @endif
-            <form action="{{route('admin.posts.store', $post->id)}}" method="post">
+            <form action="{{route('admin.posts.store', $post->id)}}" method="post" enctype='multipart/form-data'>
                 @csrf
                 <div class="mb-3 form-group">
                     <label for="title" class="form-label">Titolo del post</label>
@@ -53,6 +53,12 @@
                     <label for="post_date" class="form-label">Autore del post</label>
                     <input type="date" id="post_date" class="form-control" placeholder="Inserisci la data di creazione del post" name="post_date" value={{$post->post_date}}>
                 </div>
+
+                <div class="form-group">
+                    <label for="image">Immagine</label>
+                    <input class="form-control" type="file" id="image" name="image" placeholder="Inserisci l'immagine del post" value="{{old('image', $post->image_url)}}">
+                </div>
+
                 <div class="mb-3 form-group">
                     <label for="post_content" class="form-label">Inserisci il testo del post</label>
                     <textarea type="textarea" id="post_content" class="form-control" placeholder="Inserisci il testo del post" name="post_content" >{{old('post_content',$post->post_content)}}</textarea>

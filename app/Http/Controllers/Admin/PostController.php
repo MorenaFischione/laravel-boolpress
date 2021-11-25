@@ -1,13 +1,18 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Models\Post;
+
 use App\Models\Category;
+use App\Models\Post;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -49,9 +54,9 @@ class PostController extends Controller
             // il valore sarà la lista dei requisiti per la validazione
             'title' => 'required|string|unique:posts|max:120',
             'post_content' => 'required|string|min:40',
-            'image_url' => "string|min:4",
             'category_id' => "nullable|exists:categories,id",
-            'tags' => 'nullable|exists:tags,id'
+            'tags' => 'nullable|exists:tags,id',
+            'image' => 'image',
         ],
         [
             "required" => 'Devi compilare correttamente :attribute',
@@ -61,6 +66,8 @@ class PostController extends Controller
 
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
+
+        $data['image_url'] = Storage::put('public', $data['image']);
 
         $post = new Post();
         $post->fill($data);
@@ -121,6 +128,7 @@ class PostController extends Controller
             'post_content' => 'required|string|min:40',
             'category_id' => 'nullable|exist:categories,id',
             'tags' => 'nullable|exists:tags,id',
+            'image' => 'image',
         ],
         [
             "required" => 'Devi compilare correttamente :attribute',
@@ -130,7 +138,10 @@ class PostController extends Controller
         ]);
         
         $data = $request->all();
+        $data['user_id'] = Auth::user()->id;    
         // dd($data);
+
+        $data['image_url'] = Storage::put('public', $data['image']);
 
         $post->fill($data);
         $post->update();

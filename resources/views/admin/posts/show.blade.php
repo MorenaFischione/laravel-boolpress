@@ -11,7 +11,7 @@
             @else 
                 Nessuna categoria @endif </address>
             
-            
+            <img class="img-fluid" src="{{asset('storage') . '/' . $post->image_url}}" alt="Post Immagine"
             
             <p class="card-body"> {{$post->post_content}} </p>
             <div class="card-footer back-to-list">
