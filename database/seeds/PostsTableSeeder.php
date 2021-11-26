@@ -35,6 +35,7 @@ class PostsTableSeeder extends Seeder
             $newPost->user_id = Arr::random($user_ids);
             $newPost->post_date = $faker->dateTime;
             $newPost->post_content = $faker->paragraph(5, true);
+            $newPost->image_url = $faker->imageUrl(1000, 400, $newPost->title , true, $newPost->author);
         
             $newPost->category_id = Arr::random($category_ids);
 

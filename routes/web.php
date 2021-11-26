@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'Guests\HomeController@index')->name('guests.home');
+Route::get('/contatti', 'Guests\HomeController@createContactForm')->name('guests.contacts');
+Route::post('/contatti', 'Guests\HomeController@contactFormHandler')->name('guests.contacts.send');
+Route::get('/thanks', 'Guests\HomeController@contactFormEnder')->name('guests.thanks');
+
+
 
 Auth::routes();
 
