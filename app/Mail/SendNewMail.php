@@ -32,6 +32,6 @@ class SendNewMail extends Mailable
     {
         // ritorniamo la view che dobbiamo utilizzare per impaginare la mail
         $lead = $this->lead;
-        return $this->replyTo($this->lead->email_address)->view('email.body', compact('lead'));
+        return $this->replyTo($lead->email_address)->view('email.body', compact('lead'));
     }
 }
